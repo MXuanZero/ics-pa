@@ -18,5 +18,6 @@
 #include <memory/vaddr.h>
 
 paddr_t isa_mmu_translate(vaddr_t vaddr, int len, int type) {
-  return MEM_RET_FAIL;
+	printf("0x%x\t%x\n", vaddr, vaddr_read(vaddr, 4));
+  return MEM_RET_OK;
 }
