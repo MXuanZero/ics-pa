@@ -77,6 +77,21 @@ static int cmd_info(char *args) {
 	}
   return 0;
 }
+extern word_t paddr_read(paddr_t addr, int len);
+static int cmd_x(char *args) {
+	if(args == NULL) {
+		printf("Please enter the correct parameters!\n");
+		return 0;
+	}
+
+	uint32_t addr;
+	if(sscanf(args, "%u", &addr) > 0) {
+		printf("%x\t%x", addr, paddr_read(addr, 4));
+	} else {
+		printf("Please enter the correct parameters!\n");
+	}
+  return 0;
+}
 
 static int cmd_help(char *args);
 
@@ -90,6 +105,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
 	{"si", "Step into", cmd_si },
 	{"info", "Display info", cmd_info },
+	{"x", "Display info", cmd_x },
 };
 
 #define NR_CMD ARRLEN(cmd_table)
