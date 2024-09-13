@@ -18,14 +18,11 @@
 #include <memory/paddr.h>
 
 paddr_t isa_mmu_translate(vaddr_t vaddr, int len, int type) {
-	uint8_t m[4];
-	word_t word = vaddr_read(vaddr, 4);
+	word_t word;
+	for(int i = 0; i < len; i++) {
+		word = vaddr_read(vaddr, 4);
+		printf("0x%x: 0x%x\n", vaddr, word);
+	}
 
-	m[0] = word;
-	m[1] = word >> 8;
-	m[2] = word >> 16;
-	m[3] = word >> 24;
-
-	printf("0x%x %.2x %.2x %.2x %.2x\n", vaddr, m[0], m[1], m[2], m[3]);
   return MEM_RET_OK;
 }
