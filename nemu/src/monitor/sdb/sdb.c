@@ -17,6 +17,7 @@
 #include <cpu/cpu.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <stdio.h>
 #include "sdb.h"
 
 static int is_batch_mode = false;
@@ -85,8 +86,9 @@ static int cmd_x(char *args) {
 	}
 
 	uint32_t addr;
-	if(sscanf(args, "%u", &addr) > 0) {
-		printf("%x\t%x", addr, paddr_read(addr, 4));
+	if(sscanf(args, "%x", &addr) > 0) {
+		printf("addr: %x\n", addr);
+		printf("%x\t%x\n", addr, paddr_read(addr, 4));
 	} else {
 		printf("Please enter the correct parameters!\n");
 	}
