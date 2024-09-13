@@ -69,6 +69,9 @@ static int cmd_si(char *args) {
 
 static int cmd_info(char *args) {
 	if(args == NULL) {
+		isa_mmu_translate(0x80000000, 4, 4);
+		isa_mmu_translate(0x80000004, 4, 4);
+		isa_mmu_translate(0x80000008, 4, 4);
 		printf("Please enter the correct parameters!\n");
 		return 0;
 	}
