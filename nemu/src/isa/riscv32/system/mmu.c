@@ -25,7 +25,7 @@ paddr_t isa_mmu_translate(vaddr_t vaddr, int len, int type) {
 
 	for(int i = 0; i < line; i++) {
 		for(int j = 0; j < 4; j++) {
-			word[j] = vaddr_read(vaddr + i * type, type);
+			word[j] = vaddr_read(vaddr + i * c_max + j * type, type);
 		}
 
 		switch (num) {
