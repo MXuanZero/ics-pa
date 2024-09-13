@@ -81,14 +81,14 @@ static int cmd_info(char *args) {
 
 static int cmd_x(char *args) {
 	if(args == NULL) {
-		isa_mmu_translate(0x80000000, 4, 4);
 		printf("Please enter the correct parameters!\n");
 		return 0;
 	}
 
+	int len;
 	vaddr_t addr;
-	if(sscanf(args, "%x", &addr) > 0) {
-		isa_mmu_translate(addr, 4, 4);
+	if(sscanf(args, "%x %d", &addr, &len) == 2) {
+		isa_mmu_translate(addr, len, 4);
 	} else {
 		printf("Please enter the correct parameters!\n");
 	}
