@@ -78,18 +78,18 @@ static int cmd_info(char *args) {
 	}
   return 0;
 }
-extern word_t paddr_read(paddr_t addr, int len);
+
 static int cmd_x(char *args) {
 	if(args == NULL) {
 		printf("Please enter the correct parameters!\n");
 		return 0;
 	}
 
-	uint32_t addr;
+	vaddr_t addr;
 	if(sscanf(args, "%x", &addr) > 0) {
-		printf("addr: %x\n", addr);
-		printf("%x\t%x\n", addr, paddr_read(addr, 4));
+		isa_mmu_translate(addr, 4, 4);
 	} else {
+		isa_mmu_translate(0x80000000, 4, 4);
 		printf("Please enter the correct parameters!\n");
 	}
   return 0;
