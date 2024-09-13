@@ -18,10 +18,34 @@
 #include <memory/paddr.h>
 
 paddr_t isa_mmu_translate(vaddr_t vaddr, int len, int type) {
-	word_t word;
-	for(int i = 0; i < len; i++) {
-		word = vaddr_read(vaddr + i * type, type);
-		printf("0x%.8x: 0x%.8x\n", vaddr + i * type, word);
+	uint8_t c_max = 4;
+	word_t word[4];
+	int line = (len / c_max) + 1;
+	int num = len;
+
+	for(int i = 0; i < line; i++) {
+		for(int j = 0; j < 4; j++) {
+			word[j] = vaddr_read(vaddr + i * type, type);
+		}
+
+		switch (num) {
+		case 1:
+			printf("0x%.8x: 0x%.8x\n", vaddr + i * c_max * type, word[0]);
+			num -= 1;
+		break;
+		case 2:
+			printf("0x%.8x: 0x%.8x 0x%.8x\n", vaddr + i * c_max * type, word[0], word[1]);
+			num -= 2;
+		break;
+		case 3:
+			printf("0x%.8x: 0x%.8x 0x%.8x 0x%.8x\n", vaddr + i * c_max * type, word[0], word[1], word[2]);
+			num -= 3;
+		break;
+		default:
+			printf("0x%.8x: 0x%.8x 0x%.8x 0x%.8x 0x%.8x\n", vaddr + i * c_max * type, word[0], word[1], word[2], word[3]);
+			num -= 4;
+		break;
+		}
 	}
 
   return MEM_RET_OK;
