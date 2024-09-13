@@ -20,8 +20,8 @@
 paddr_t isa_mmu_translate(vaddr_t vaddr, int len, int type) {
 	word_t word;
 	for(int i = 0; i < len; i++) {
-		word = vaddr_read(vaddr, 4);
-		printf("0x%x: 0x%x\n", vaddr, word);
+		word = vaddr_read(vaddr + i * type, type);
+		printf("0x%x: 0x%x\n", vaddr + i * type, word);
 	}
 
   return MEM_RET_OK;
