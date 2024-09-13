@@ -52,6 +52,20 @@ static int cmd_q(char *args) {
   return -1;
 }
 
+static int cmd_si(char *args) {
+	int step = 1;
+	if(args == NULL) {
+		cpu_exec(step);
+	} else {
+		if(sscanf(args, "%d", &step) > 0) {
+			cpu_exec(step);
+		} else {
+			printf("Please enter the correct parameters!\n");
+		}
+	}
+	return 0;
+}
+
 static int cmd_help(char *args);
 
 static struct {
@@ -62,8 +76,7 @@ static struct {
   { "help", "Display information about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-
-  /* TODO: Add more commands */
+	{"si", "Step into", cmd_si },
 
 };
 
