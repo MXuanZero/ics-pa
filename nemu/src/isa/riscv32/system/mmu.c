@@ -20,7 +20,7 @@
 paddr_t isa_mmu_translate(vaddr_t vaddr, int len, int type) {
 	uint8_t c_max = 4;
 	word_t word[4];
-	int line = (len / c_max) + 1;
+	int line = len ? ((len - 1) / c_max) + 1 : 1;
 	int num = len;
 
 	for(int i = 0; i < line; i++) {
