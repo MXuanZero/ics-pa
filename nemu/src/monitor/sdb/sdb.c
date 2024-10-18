@@ -112,7 +112,9 @@ static int cmd_x(char *args) {
 
 	int len;
 	vaddr_t addr;
-	if(sscanf(args, "%x %d", &addr, &len) == 2) {
+	if(sscanf(args, "%d %x", &len, &addr) == 2) {
+    /* TODO: 数据溢出处理 */
+    // PMEM_LEFT, PMEM_RIGHT
 		isa_mmu_translate(addr, len, 4);
 	} else {
 		printf("Please enter the correct parameters!\n");
