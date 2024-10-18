@@ -96,7 +96,7 @@ static int cmd_x(char *args) {
 }
 
 static int cmd_clear(char *args) {
-  printf("\033[2J");
+  printf("\033[1;1H");
   return 0;
 }
 
