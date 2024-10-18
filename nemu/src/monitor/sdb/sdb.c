@@ -95,6 +95,10 @@ static int cmd_x(char *args) {
   return 0;
 }
 
+static int cmd_clear(char *args) {
+  return system ("clear");
+}
+
 static int cmd_help(char *args);
 
 static struct {
@@ -103,6 +107,7 @@ static struct {
   int (*handler) (char *);
 } cmd_table [] = {
   { "help", "Display information about all supported commands", cmd_help },
+  { "clear", "Clear the screen display.", cmd_clear },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
 	{ "si", "Step into", cmd_si },
