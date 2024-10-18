@@ -121,7 +121,7 @@ static int cmd_x(char *args) {
 }
 
 static int cmd_clear(char *args) {
-  printf("%s\n%s\n", ANSI_CLEAR_SCR, ANSI_CUR_TO_TOP);
+  printf("%s%s", ANSI_CLEAR_SCR, ANSI_CUR_TO_TOP);
   return 0;
 }
 
