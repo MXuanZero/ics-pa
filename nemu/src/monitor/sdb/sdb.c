@@ -19,6 +19,7 @@
 #include <readline/history.h>
 #include <stdio.h>
 #include "sdb.h"
+#include "utils.h"
 
 static int is_batch_mode = false;
 
@@ -120,8 +121,7 @@ static int cmd_x(char *args) {
 }
 
 static int cmd_clear(char *args) {
-  printf("\033[2J");
-  printf("\033[1;1H");
+  printf("%s\n%s\n", ANSI_CLEAR_SCR, ANSI_CUR_TO_TOP);
   return 0;
 }
 

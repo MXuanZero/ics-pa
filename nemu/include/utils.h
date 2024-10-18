@@ -53,6 +53,8 @@ uint64_t get_time();
 #define ANSI_BG_CYAN    "\33[1;46m"
 #define ANSI_BG_WHITE   "\33[1;47m"
 #define ANSI_NONE       "\33[0m"
+#define ANSI_CLEAR_SCR  "\33[2J"
+#define ANSI_CUR_TO_TOP "\33[1;1H"
 
 #define ANSI_FMT(str, fmt) fmt str ANSI_NONE
 
