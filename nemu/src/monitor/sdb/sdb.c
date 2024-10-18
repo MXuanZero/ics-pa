@@ -25,6 +25,30 @@ static int is_batch_mode = false;
 void init_regex();
 void init_wp_pool();
 
+static int cmd_help(char *args);
+static int cmd_clear(char *args);
+static int cmd_c(char *args);
+static int cmd_q(char *args);
+static int cmd_si(char *args);
+static int cmd_info(char *args);
+static int cmd_x(char *args);
+
+static struct {
+  const char *name;
+  const char *description;
+  int (*handler) (char *);
+} cmd_table [] = {
+  { "help", "Display information about all supported commands", cmd_help },
+  { "clear", "Clear the screen display.", cmd_clear },
+  { "c", "Continue the execution of the program", cmd_c },
+  { "q", "Exit NEMU", cmd_q },
+	{ "si", "Step into", cmd_si },
+	{ "info", "Display info", cmd_info },
+	{ "x", "Display mem", cmd_x },
+};
+
+#define NR_CMD ARRLEN(cmd_table)
+
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
   static char *line_read = NULL;
@@ -100,24 +124,6 @@ static int cmd_clear(char *args) {
   printf("\033[1;1H");
   return 0;
 }
-
-static int cmd_help(char *args);
-
-static struct {
-  const char *name;
-  const char *description;
-  int (*handler) (char *);
-} cmd_table [] = {
-  { "help", "Display information about all supported commands", cmd_help },
-  { "clear", "Clear the screen display.", cmd_clear },
-  { "c", "Continue the execution of the program", cmd_c },
-  { "q", "Exit NEMU", cmd_q },
-	{ "si", "Step into", cmd_si },
-	{ "info", "Display info", cmd_info },
-	{ "x", "Display mem", cmd_x },
-};
-
-#define NR_CMD ARRLEN(cmd_table)
 
 static int cmd_help(char *args) {
   /* extract the first argument */
