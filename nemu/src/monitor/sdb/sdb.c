@@ -72,8 +72,8 @@ static int cmd_info(char *args) {
 		printf("Please enter the correct parameters!\n");
 		return 0;
 	}
-	
-	if(strcmp(args, "r") == 0) {
+	char *arg = strtok(NULL, " ");
+	if(strcmp(arg, "r") == 0) {
 		isa_reg_display();
 	}
   return 0;
